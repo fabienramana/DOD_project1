@@ -28,7 +28,38 @@ public class Main {
         
         
         //TP2
+        //Filtre rectangle
+        List<Rectangle> rectangles = new ArrayList<>();
+        for(Form f: formes){
+            if(f instanceof Rectangle){
+                rectangles.add((Rectangle)f);
+            }
+        }
+        for(Rectangle r: rectangles){
+            System.out.println(r.toString());   
+        }
         
+        //Filtre cercle
+        List<Cercle> cercles = new ArrayList<>();
+        for(Form f: formes){
+            if(f instanceof Cercle){
+                cercles.add((Cercle)f);
+            }
+        }
+        for(Cercle c: cercles){
+            System.out.println(c.toString());
+        }
+        
+        //mutation convert cercle to rectangle
+        List<Rectangle> rec = new ArrayList<>();
+        for(Cercle c : cercles){
+            Map<String, Double> item_dimensions = transform_cercle_to_rectangle(c);
+            rec.add(new Rectangle(item_dimensions.get("x"), item_dimensions.get("y"),item_dimensions.get("width"),item_dimensions.get("width"), "red"));
+        }
+        
+        for(Rectangle r: rec){
+            System.out.println(r.toString());
+        }
         
     }
     
@@ -57,7 +88,7 @@ public class Main {
     public static Map<String, Double> get_dimensions_of_circle(Cercle c){
         Map<String, Double> item_dimensions = new HashMap<>();
         double x = c.cx-c.radius;
-        double y =c.cy+c.radius;
+        double y = c.cy+c.radius;
         item_dimensions.put("top_x", x);
         item_dimensions.put("top_y", y);
         item_dimensions.put("bottom_x", x+c.radius*2);
@@ -71,6 +102,14 @@ public class Main {
         item_dimensions.put("top_y", r.y);
         item_dimensions.put("bottom_x", r.x + r.width);
         item_dimensions.put("bottom_y", r.y - r.height);
+        return item_dimensions;
+    }
+    
+    public static Map<String, Double> transform_cercle_to_rectangle(Cercle c){
+        Map<String, Double> item_dimensions = new HashMap<>();
+        item_dimensions.put("x", c.cx-c.radius);
+        item_dimensions.put("y", c.cy+c.radius);
+        item_dimensions.put("width", c.radius*2);
         return item_dimensions;
     }
     
