@@ -12,7 +12,7 @@ public class Cercle extends Form{
         this.cy = cy;
         this.radius = Math.abs(radius);
     }
-    
+
     @Override
     public String toString(){
         return "C (cx: "+cx+", cy: "+cy+", r: "+radius+", color: "+color+")";
