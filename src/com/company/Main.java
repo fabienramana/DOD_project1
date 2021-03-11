@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         Cercle form1 = new Cercle( 50,50,50,"green");
         Rect form2 = new Rect(0,0,2,2,"red");
         Cercle form3 = new Cercle(5,5,1,"green");
@@ -24,6 +27,9 @@ public class Main {
         
         //TP2
         tp2(formes);
+        
+        //TP3
+        tp3(formes);
     }
     
     public static void tp1(List<Form> formes){
@@ -72,8 +78,37 @@ public class Main {
         System.out.println("l'espace occupé est de: "+ e.calculate_dimensions(finalSpace));
     }
     
-    public static void tp3(List<Form> formes){
+    public static void tp3(List<Form> formes) throws Exception{
+        System.out.println("TP3");
+        Emission emission = new Emission();
+        Conversion conversion = new Conversion();
+        Tache mutation;
         
+        int nbCoeurs = 2;
+        ExecutorService processeur = Executors.newFixedThreadPool(2);
+        
+        List<Future<Form>> taches = new ArrayList<>();
+        for(Form f : formes){
+            if(f instanceof Rect){
+                mutation = new Tache(f);
+            }
+            else{
+                mutation = new Tache(f, conversion);
+            }
+            taches.add(processeur.submit(mutation));
+        }
+        
+        List<Form> espaces = new ArrayList<>();
+        for (Future<Form> tache : taches){
+            espaces.add(tache.get());
+        }
+        
+        processeur.shutdown();
+        
+        Consommation conso = new Consommation();
+        Espace finalSpace = conso.getEspace(emission.create(espaces));
+        System.out.println(finalSpace.toString());
+        System.out.println("l'espace occupé est de: "+ emission.calculate_dimensions(finalSpace));
     }
     
 }
