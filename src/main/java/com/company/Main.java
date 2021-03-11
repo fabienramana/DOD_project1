@@ -209,7 +209,6 @@ public class Main extends Application {
 				}
 				changeContour();
 				generateShapes();
-				//shapePane.getChildren().remove(newShape);
 			});
 			newShape.setFill(Paint.valueOf(f.getValue().color));
 			shapePane.getChildren().add(newShape);
@@ -218,6 +217,7 @@ public class Main extends Application {
 	
 	public void changeContour() {
 		shapePane.getChildren().clear();
+		if(formes.size() == 0) return;
 		Consommation c = new Consommation();
 		Mutation m = new Mutation();
         Emission e = new Emission();
@@ -234,9 +234,9 @@ public class Main extends Application {
             System.out.println(r.toString());
         }
 		System.out.println("Espace total "+espace.toString());
-		Shape newShape = new Rectangle(espace.top_x, espace.top_y, espace.bottom_x-espace.top_x,espace.bottom_y+espace.top_y);
+		Shape newShape = new Rectangle(espace.top_x, espace.top_y, espace.bottom_x-espace.top_x,espace.bottom_y-espace.top_y);
 		
-		System.out.println(newShape);
+		System.out.println("Entourage: "+newShape);
 		newShape.setFill(Color.valueOf("transparent"));
 		newShape.setStroke(Color.valueOf("black"));
 		
