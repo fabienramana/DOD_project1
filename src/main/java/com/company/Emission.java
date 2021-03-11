@@ -10,8 +10,8 @@ public class Emission {
 		List<Form> espaces = new ArrayList<>();
 		Iterator<Form> itFormes = formes.stream().iterator();
 		while (itFormes.hasNext()) {
-			Rectangle r = (Rectangle) itFormes.next();
-			espaces.add(new Espace(r.x, r.y, r.x + r.width, r.y - r.height, r.color));
+			Rect r = (Rect) itFormes.next();
+			espaces.add(new Espace(r.x, r.y, r.x + r.width, r.y + r.height, r.color));
 		}
 		return espaces;
 	}

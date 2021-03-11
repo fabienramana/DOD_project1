@@ -1,6 +1,6 @@
 package com.company;
 
-public class Rectangle extends Form{
+public class Rect extends Form{
     
     double x;
     double y;
@@ -8,7 +8,7 @@ public class Rectangle extends Form{
     double width;
     double height;
     
-    public Rectangle(double x, double y, double width, double height, String color){
+    public Rect(double x, double y, double width, double height, String color){
         super(RECTANGLE, color);
         this.x = x;
         this.y = y;

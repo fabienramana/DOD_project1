@@ -16,6 +16,6 @@ public class Espace extends Form{
     
     @Override
     public String toString(){
-        return "E (top_left: "+top_x+", top_right: "+top_y+", bottom_left: "+bottom_x+", bottom_right: "+bottom_y+")";
+        return "E (top_x: "+top_x+", top_y: "+top_y+", bottom_x: "+bottom_x+", bottom_y: "+bottom_y+")";
     }
 }
