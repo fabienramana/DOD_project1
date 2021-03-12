@@ -9,6 +9,9 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 
+import java.time.Duration;
+import java.time.Instant;
+
 public class Main {
 
     public static void main(String[] args) throws Exception {
@@ -23,13 +26,37 @@ public class Main {
         formes.add(form3);
 
         //TP1
+        long startTime = System.currentTimeMillis();
+        Instant start = Instant.now();
         tp1(formes);
+        Instant end = Instant.now();
+        long endTime = System.currentTimeMillis();
+        long timeElapsed = endTime - startTime;
+        Duration interval = Duration.between(start, end);
+        System.out.println("Execution time in milliseconds: "+ timeElapsed);
+        System.out.println("Execution time in seconds: "+ interval.getSeconds());
         
         //TP2
+        startTime = System.currentTimeMillis();
+        start = Instant.now();
         tp2(formes);
+        endTime = System.currentTimeMillis();
+        timeElapsed = endTime - startTime;
+        end = Instant.now();
+        interval = Duration.between(start, end);
+        System.out.println("Execution time in milliseconds: "+ timeElapsed);
+        System.out.println("Execution time in seconds: "+ interval.getSeconds());
         
         //TP3
+        startTime = System.currentTimeMillis();
+        start = Instant.now();
         tp3(formes);
+        endTime = System.currentTimeMillis();
+        timeElapsed = endTime - startTime;
+        end = Instant.now();
+        interval = Duration.between(start, end);
+        System.out.println("Execution time in milliseconds: "+ timeElapsed);
+        System.out.println("Execution time in seconds: "+ interval.getSeconds());
     }
     
     public static void tp1(List<Form> formes){
